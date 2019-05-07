@@ -1,0 +1,113 @@
+{
+    "type": "object",
+    "properties": {
+        "inputId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A request to update an input.",
+            "properties": {
+                "Destinations": {
+                    "description": "Destination settings for PUSH type inputs.",
+                    "items": {
+                        "description": "Endpoint settings for a PUSH type input.",
+                        "properties": {
+                            "StreamName": {
+                                "description": "A unique name for the location the RTMP stream is being pushed\nto.\n",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "InputSecurityGroups": {
+                    "description": "A list of security groups referenced by IDs to attach to the input.",
+                    "items": {
+                        "description": "Placeholder documentation for __string",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "MediaConnectFlows": {
+                    "description": "A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one\nFlow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a\nseparate Availability Zone as this ensures your EML input is redundant to AZ issues.\n",
+                    "items": {
+                        "description": "The settings for a MediaConnect Flow.",
+                        "properties": {
+                            "FlowArn": {
+                                "description": "The ARN of the MediaConnect Flow that you want to use as a source.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "Name": {
+                    "description": "Name of the input.",
+                    "type": "string"
+                },
+                "RoleArn": {
+                    "description": "The Amazon Resource Name (ARN) of the role this input assumes during and after creation.",
+                    "type": "string"
+                },
+                "Sources": {
+                    "description": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n",
+                    "items": {
+                        "description": "Settings for for a PULL type input.",
+                        "properties": {
+                            "PasswordParam": {
+                                "description": "The key used to extract the password from EC2 Parameter store.",
+                                "type": "string"
+                            },
+                            "Url": {
+                                "description": "This represents the customer's source URL where stream is\npulled from.\n",
+                                "type": "string"
+                            },
+                            "Username": {
+                                "description": "The username for the input source.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

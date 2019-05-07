@@ -1,0 +1,78 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The IPv4 CIDRs to whitelist for this Input Security Group",
+            "properties": {
+                "Tags": {
+                    "description": "A collection of key-value pairs.",
+                    "items": {
+                        "properties": {
+                            "key": {
+                                "description": "Placeholder documentation for __string",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "Placeholder documentation for __string",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "WhitelistRules": {
+                    "description": "List of IPv4 CIDR addresses to whitelist",
+                    "items": {
+                        "description": "An IPv4 CIDR to whitelist.",
+                        "properties": {
+                            "Cidr": {
+                                "description": "The IPv4 CIDR to whitelist.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

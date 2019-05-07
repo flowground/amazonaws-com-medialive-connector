@@ -1,0 +1,67 @@
+{
+    "type": "object",
+    "properties": {
+        "offeringId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Placeholder documentation for PurchaseOfferingRequest",
+            "properties": {
+                "Count": {
+                    "description": "Number of resources",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "Name": {
+                    "description": "Name for the new reservation",
+                    "type": "string"
+                },
+                "RequestId": {
+                    "description": "Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.",
+                    "type": "string"
+                },
+                "Start": {
+                    "description": "Requested reservation start time (UTC) in ISO-8601 format. The specified time must be between the first day of the current month and one year from now. If no value is given, the default is now.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Count"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

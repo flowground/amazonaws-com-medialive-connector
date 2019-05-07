@@ -1,0 +1,469 @@
+{
+    "type": "object",
+    "properties": {
+        "channelId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "List of actions to create and list of actions to delete.",
+            "properties": {
+                "Creates": {
+                    "description": "Schedule actions to create in the schedule.",
+                    "properties": {
+                        "ScheduleActions": {
+                            "description": "A list of schedule actions to create.",
+                            "items": {
+                                "description": "Contains information on a single schedule action.",
+                                "properties": {
+                                    "ActionName": {
+                                        "description": "The name of the action, must be unique within the schedule. This name provides the main reference to an action once it is added to the schedule. A name is unique if it is no longer in the schedule. The schedule is automatically cleaned up to remove actions with a start time of more than 1 hour ago (approximately) so at that point a name can be reused.",
+                                        "type": "string"
+                                    },
+                                    "ScheduleActionSettings": {
+                                        "description": "Settings for this schedule action.",
+                                        "properties": {
+                                            "HlsTimedMetadataSettings": {
+                                                "description": "Action to insert HLS metadata",
+                                                "properties": {
+                                                    "Id3": {
+                                                        "description": "Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "Id3"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "InputSwitchSettings": {
+                                                "description": "Action to switch the input",
+                                                "properties": {
+                                                    "InputAttachmentNameReference": {
+                                                        "description": "The name of the input attachment that should be switched to by this action.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "InputAttachmentNameReference"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "PauseStateSettings": {
+                                                "description": "Action to pause or unpause one or both channel pipelines",
+                                                "properties": {
+                                                    "Pipelines": {
+                                                        "description": "Placeholder documentation for __listOfPipelinePauseStateSettings",
+                                                        "items": {
+                                                            "description": "Settings for pausing a pipeline.",
+                                                            "properties": {
+                                                                "PipelineId": {
+                                                                    "description": "Pipeline ID to pause (\"PIPELINE_0\" or \"PIPELINE_1\").",
+                                                                    "enum": [
+                                                                        "PIPELINE_0",
+                                                                        "PIPELINE_1"
+                                                                    ],
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "PipelineId"
+                                                            ],
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "Scte35ReturnToNetworkSettings": {
+                                                "description": "Action to insert SCTE-35 return_to_network message",
+                                                "properties": {
+                                                    "SpliceEventId": {
+                                                        "description": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.",
+                                                        "maximum": 4294967295,
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "SpliceEventId"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "Scte35SpliceInsertSettings": {
+                                                "description": "Action to insert SCTE-35 splice_insert message",
+                                                "properties": {
+                                                    "Duration": {
+                                                        "description": "Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.",
+                                                        "maximum": 8589934591,
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "SpliceEventId": {
+                                                        "description": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.",
+                                                        "maximum": 4294967295,
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "SpliceEventId"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "Scte35TimeSignalSettings": {
+                                                "description": "Action to insert SCTE-35 time_signal message",
+                                                "properties": {
+                                                    "Scte35Descriptors": {
+                                                        "description": "The list of SCTE-35 descriptors accompanying the SCTE-35 time_signal.",
+                                                        "items": {
+                                                            "description": "Holds one set of SCTE-35 Descriptor Settings.",
+                                                            "properties": {
+                                                                "Scte35DescriptorSettings": {
+                                                                    "description": "SCTE-35 Descriptor Settings.",
+                                                                    "properties": {
+                                                                        "SegmentationDescriptorScte35DescriptorSettings": {
+                                                                            "description": "SCTE-35 Segmentation Descriptor.",
+                                                                            "properties": {
+                                                                                "DeliveryRestrictions": {
+                                                                                    "description": "Holds the four SCTE-35 delivery restriction parameters.",
+                                                                                    "properties": {
+                                                                                        "ArchiveAllowedFlag": {
+                                                                                            "description": "Corresponds to SCTE-35 archive_allowed_flag.",
+                                                                                            "enum": [
+                                                                                                "ARCHIVE_NOT_ALLOWED",
+                                                                                                "ARCHIVE_ALLOWED"
+                                                                                            ],
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "DeviceRestrictions": {
+                                                                                            "description": "Corresponds to SCTE-35 device_restrictions parameter.",
+                                                                                            "enum": [
+                                                                                                "NONE",
+                                                                                                "RESTRICT_GROUP0",
+                                                                                                "RESTRICT_GROUP1",
+                                                                                                "RESTRICT_GROUP2"
+                                                                                            ],
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "NoRegionalBlackoutFlag": {
+                                                                                            "description": "Corresponds to SCTE-35 no_regional_blackout_flag parameter.",
+                                                                                            "enum": [
+                                                                                                "REGIONAL_BLACKOUT",
+                                                                                                "NO_REGIONAL_BLACKOUT"
+                                                                                            ],
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "WebDeliveryAllowedFlag": {
+                                                                                            "description": "Corresponds to SCTE-35 web_delivery_allowed_flag parameter.",
+                                                                                            "enum": [
+                                                                                                "WEB_DELIVERY_NOT_ALLOWED",
+                                                                                                "WEB_DELIVERY_ALLOWED"
+                                                                                            ],
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "required": [
+                                                                                        "DeviceRestrictions",
+                                                                                        "ArchiveAllowedFlag",
+                                                                                        "WebDeliveryAllowedFlag",
+                                                                                        "NoRegionalBlackoutFlag"
+                                                                                    ],
+                                                                                    "type": "object"
+                                                                                },
+                                                                                "SegmentNum": {
+                                                                                    "description": "Corresponds to SCTE-35 segment_num. A value that is valid for the specified segmentation_type_id.",
+                                                                                    "maximum": 255,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SegmentationCancelIndicator": {
+                                                                                    "description": "Corresponds to SCTE-35 segmentation_event_cancel_indicator.",
+                                                                                    "enum": [
+                                                                                        "SEGMENTATION_EVENT_NOT_CANCELED",
+                                                                                        "SEGMENTATION_EVENT_CANCELED"
+                                                                                    ],
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "SegmentationDuration": {
+                                                                                    "description": "Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message.",
+                                                                                    "maximum": 1099511627775,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SegmentationEventId": {
+                                                                                    "description": "Corresponds to SCTE-35 segmentation_event_id. ",
+                                                                                    "maximum": 4294967295,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SegmentationTypeId": {
+                                                                                    "description": "Corresponds to SCTE-35 segmentation_type_id. One of the segmentation_type_id values listed in the SCTE-35 specification. On the console, enter the ID in decimal (for example, \"52\"). In the CLI, API, or an SDK, enter the ID in hex (for example, \"0x34\") or decimal (for example, \"52\").",
+                                                                                    "maximum": 255,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SegmentationUpid": {
+                                                                                    "description": "Corresponds to SCTE-35 segmentation_upid. Enter a string containing the hexadecimal representation of the characters that make up the SCTE-35 segmentation_upid value. Must contain an even number of hex characters. Do not include spaces between each hex pair. For example, the ASCII \"ADS Information\" becomes hex \"41445320496e666f726d6174696f6e.",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "SegmentationUpidType": {
+                                                                                    "description": "Corresponds to SCTE-35 segmentation_upid_type. On the console, enter one of the types listed in the SCTE-35 specification, converted to a decimal. For example, \"0x0C\" hex from the specification is \"12\" in decimal. In the CLI, API, or an SDK, enter one of the types listed in the SCTE-35 specification, in either hex (for example, \"0x0C\" ) or in decimal (for example, \"12\").",
+                                                                                    "maximum": 255,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SegmentsExpected": {
+                                                                                    "description": "Corresponds to SCTE-35 segments_expected. A value that is valid for the specified segmentation_type_id.",
+                                                                                    "maximum": 255,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SubSegmentNum": {
+                                                                                    "description": "Corresponds to SCTE-35 sub_segment_num. A value that is valid for the specified segmentation_type_id.",
+                                                                                    "maximum": 255,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "SubSegmentsExpected": {
+                                                                                    "description": "Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.",
+                                                                                    "maximum": 255,
+                                                                                    "minimum": 0,
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "SegmentationEventId",
+                                                                                "SegmentationCancelIndicator"
+                                                                            ],
+                                                                            "type": "object"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "SegmentationDescriptorScte35DescriptorSettings"
+                                                                    ],
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "Scte35DescriptorSettings"
+                                                            ],
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "Scte35Descriptors"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "StaticImageActivateSettings": {
+                                                "description": "Action to activate a static image overlay",
+                                                "properties": {
+                                                    "Duration": {
+                                                        "description": "The duration in milliseconds for the image to remain on the video. If omitted or set to 0 the duration is unlimited and the image will remain until it is explicitly deactivated.",
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "FadeIn": {
+                                                        "description": "The time in milliseconds for the image to fade in. The fade-in starts at the start time of the overlay. Default is 0 (no fade-in).",
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "FadeOut": {
+                                                        "description": "Applies only if a duration is specified. The time in milliseconds for the image to fade out. The fade-out starts when the duration time is hit, so it effectively extends the duration. Default is 0 (no fade-out).",
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "Height": {
+                                                        "description": "The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.",
+                                                        "minimum": 1,
+                                                        "type": "integer"
+                                                    },
+                                                    "Image": {
+                                                        "description": "The location and filename of the image file to overlay on the video. The file must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than the input video.",
+                                                        "properties": {
+                                                            "PasswordParam": {
+                                                                "description": "key used to extract the password from EC2 Parameter store",
+                                                                "type": "string"
+                                                            },
+                                                            "Uri": {
+                                                                "description": "Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: \"rtmp://fmsserver/live\".",
+                                                                "type": "string"
+                                                            },
+                                                            "Username": {
+                                                                "description": "Documentation update needed",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "Uri"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "ImageX": {
+                                                        "description": "Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.",
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "ImageY": {
+                                                        "description": "Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.",
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "Layer": {
+                                                        "description": "The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the video, each layer with a different image. The layers are in Z order, which means that overlays with higher values of layer are inserted on top of overlays with lower values of layer. Default is 0.",
+                                                        "maximum": 7,
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "Opacity": {
+                                                        "description": "Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.",
+                                                        "maximum": 100,
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "Width": {
+                                                        "description": "The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.",
+                                                        "minimum": 1,
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "Image"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "StaticImageDeactivateSettings": {
+                                                "description": "Action to deactivate a static image overlay",
+                                                "properties": {
+                                                    "FadeOut": {
+                                                        "description": "The time in milliseconds for the image to fade out. Default is 0 (no fade-out).",
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    },
+                                                    "Layer": {
+                                                        "description": "The image overlay layer to deactivate, 0 to 7. Default is 0.",
+                                                        "maximum": 7,
+                                                        "minimum": 0,
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "ScheduleActionStartSettings": {
+                                        "description": "The time for the action to start in the channel.",
+                                        "properties": {
+                                            "FixedModeScheduleActionStartSettings": {
+                                                "description": "Holds the start time for the action.",
+                                                "properties": {
+                                                    "Time": {
+                                                        "description": "Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants \"T\" for time and \"Z\" for \"UTC format\".",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "Time"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "FollowModeScheduleActionStartSettings": {
+                                                "description": "Specifies an action to follow for scheduling this action.",
+                                                "properties": {
+                                                    "FollowPoint": {
+                                                        "description": "Identifies whether this action starts relative to the start or relative to the end of the reference action.",
+                                                        "enum": [
+                                                            "END",
+                                                            "START"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "ReferenceActionName": {
+                                                        "description": "The action name of another action that this one refers to.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "ReferenceActionName",
+                                                    "FollowPoint"
+                                                ],
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "required": [
+                                    "ActionName",
+                                    "ScheduleActionStartSettings",
+                                    "ScheduleActionSettings"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "ScheduleActions"
+                    ],
+                    "type": "object"
+                },
+                "Deletes": {
+                    "description": "Schedule actions to delete from the schedule.",
+                    "properties": {
+                        "ActionNames": {
+                            "description": "A list of schedule actions to delete.",
+                            "items": {
+                                "description": "Placeholder documentation for __string",
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "ActionNames"
+                    ],
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
